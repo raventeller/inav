@@ -5,6 +5,8 @@ Locate your Flight Controller target config.h in BetaFlight's repo, eg.: [config
 
 It is also advisable to record the output of the timer command from BetaFlight, as it will provide useful information on `timer` usage that can be used to adjust the generated target later.
 
+The script generates `CAMERA_CONTROL_PIN` and PINIO `permanentId` wiring in `config.c` automatically when present in the source `config.h`.
+
 ```
 # timer
 timer B08 AF3
