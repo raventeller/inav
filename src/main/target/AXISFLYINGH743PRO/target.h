@@ -59,8 +59,7 @@
 // Motor/servo DMA note: SERVO4_PIN (PD15/TIM4_CH4) has no per-channel DMAMUX
 // request on this MCU; USE_DSHOT_DMAR repoints TIM4_CH4 at the TIM4_UP burst
 // request so the channel keeps a valid DMA path. This makes all DSHOT-capable
-// outputs use one shared burst DMA stream per timer (see target.c dmaopt
-// comments for how streams are kept unique per timer).
+// outputs use one shared burst DMA stream per timer
 #define USE_DSHOT_DMAR
 
 // *************** SPI2: OSD *****************
@@ -167,9 +166,8 @@
 // *************** PINIO ***************************
 #define USE_PINIO
 #define USE_PINIOBOX
-#define PINIO1_PIN               PE2   // VTX PWR box, non-inverted
+#define PINIO1_PIN               PE2   // VTX PWR box
 #define PINIO2_PIN               PA8   // CAM 1,2 box
-#define PINIO2_FLAGS             PINIO_FLAGS_INVERTED
 
 // *************** Blackbox ************************
 #define DEFAULT_BLACKBOX_DEVICE        BLACKBOX_DEVICE_FLASH

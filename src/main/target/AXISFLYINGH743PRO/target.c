@@ -46,9 +46,7 @@ timerHardware_t timerHardware[] = {
     DEF_TIM(TIM2, CH3, PA2,  TIM_USE_OUTPUT_AUTO, 0, 6),   // M7
     DEF_TIM(TIM2, CH4, PA3,  TIM_USE_OUTPUT_AUTO, 0, 7),   // M8
 
-    // Servos - DMA2 Stream1-4 (dmaopt 9-12). dmaopt 8 (DMA2 Stream0) is
-    // reserved for ADC1, which is hardwired to that stream on H743 and is
-    // not user-configurable, so it is deliberately skipped here.
+    // dmaopt 8 (DMA2 Stream0) is reserved for ADC
     DEF_TIM(TIM4, CH1, PD12, TIM_USE_OUTPUT_AUTO, 0, 9),   // S1
     DEF_TIM(TIM4, CH2, PD13, TIM_USE_OUTPUT_AUTO, 0, 10),  // S2
     DEF_TIM(TIM4, CH3, PD14, TIM_USE_OUTPUT_AUTO, 0, 11),  // S3
@@ -56,10 +54,6 @@ timerHardware_t timerHardware[] = {
 
     // LED strip - DMA2 Stream5 (dmaopt 13)
     DEF_TIM(TIM15, CH1, PE5,  TIM_USE_LED, 0, 13),         // LED_STRIP_PIN
-
-    // Gyro CLKIN routing pins - plain timer output, no DMA consumer
-    DEF_TIM(TIM3, CH3, PB0,   TIM_USE_ANY, 0, 0),          // GYRO_1_CLKIN_PIN
-    DEF_TIM(TIM3, CH4, PB1,   TIM_USE_ANY, 0, 0),          // GYRO_2_CLKIN_PIN
 };
 
 const int timerHardwareCount = sizeof(timerHardware) / sizeof(timerHardware[0]);
