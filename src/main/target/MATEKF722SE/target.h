@@ -14,11 +14,6 @@
  * You should have received a copy of the GNU General Public License
  * along with INAV.  If not, see <http://www.gnu.org/licenses/>.
  */
-
-
-/* * This file is part of INAV. * * INAV is free software: you can redistribute it and/or modify * it under the terms of the GNU General Public License as published by * the Free Software Foundation, either version 3 of the License, or * (at your option) any later version. * * INAV is distributed in the hope that it will be useful, * but WITHOUT ANY WARRANTY; without even the implied warranty of * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the * GNU General Public License for more details. * * You should have received a copy of the GNU General Public License * along with INAV. If not, see <http://www.gnu.org/licenses/>. */
-
-
 /* * This file is part of INAV. * * INAV is free software: you can redistribute it and/or modify * it under the terms of the GNU General Public License as published by * the Free Software Foundation, either version 3 of the License, or * (at your option) any later version. * * INAV is distributed in the hope that it will be useful, * but WITHOUT ANY WARRANTY; without even the implied warranty of * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the * GNU General Public License for more details. * * You should have received a copy of the GNU General Public License * along with INAV. If not, see <http://gnu.org>. */
 
 #pragma once
@@ -37,8 +32,8 @@
 #define BEEPER_INVERTED
 
 // *************** SPI1 Gyro & ACC *******************
-// COMMENTED OUT TO FORCE INAV TO USE OUR HARDWARE OVERRIDES:
-// //#define USE_TARGET_IMU_HARDWARE_DESCRIPTORS
+// Keep descriptors active so target.c doesn't clash with the linker
+#define USE_TARGET_IMU_HARDWARE_DESCRIPTORS
 
 #define USE_SPI
 #define USE_SPI_DEVICE_1
@@ -46,34 +41,37 @@
 #define SPI1_MISO_PIN PA6
 #define SPI1_MOSI_PIN PA7
 
-// Explicitly define IMU 1 (Main Gyro)
+#define USE_DUAL_GYRO
+
+// Force pin mappings directly over any automated defaults
 #define USE_IMU_MPU6000
 #define IMU_MPU6000_ALIGN CW180_DEG_FLIP
+#undef MPU6000_CS_PIN
 #define MPU6000_CS_PIN PA15
 #define MPU6000_SPI_BUS BUS_SPI1
 
-// Explicitly define IMU 2 (Alternative Gyro fallback)
 #define USE_IMU_MPU6500
 #define IMU_MPU6500_ALIGN CW90_DEG
+#undef MPU6500_CS_PIN
 #define MPU6500_CS_PIN PD2
 #define MPU6500_SPI_BUS BUS_SPI1
 
 // *************** I2C /Baro/Mag *********************
 #define USE_I2C
 
-// Configure Physical I2C Bus 1
+// Reconfigure Physical I2C Bus 1 (Baro)
 #define USE_I2C_DEVICE_1
+#undef I2C1_SCL
+#undef I2C1_SDA
 #define I2C1_SCL PB8
 #define I2C1_SDA PB9
 
-// Configure Physical I2C Bus 2
+// Reconfigure Physical I2C Bus 2 (External Compass)
 #define USE_I2C_DEVICE_2
+#undef I2C2_SCL
+#undef I2C2_SDA
 #define I2C2_SCL PB10
 #define I2C2_SDA PB11
-
-// Force INAV to use software I2C processing to clear the 50 I2C errors
-#define I2C1_OVERCLOCK false
-#define I2C2_OVERCLOCK false
 
 #define USE_BARO
 #define BARO_I2C_BUS BUS_I2C1
@@ -187,4 +185,3 @@
 
 #define USE_DSHOT
 #define USE_ESC_SENSOR
-
