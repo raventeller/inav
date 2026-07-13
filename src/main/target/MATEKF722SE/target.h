@@ -33,8 +33,8 @@
 #define BEEPER_INVERTED
 
 // *************** SPI1 Gyro & ACC *******************
-// Force standard hardware compilation rules
-#undef USE_TARGET_IMU_HARDWARE_DESCRIPTORS
+// Keep descriptors active so common_hardware.c links perfectly
+#define USE_TARGET_IMU_HARDWARE_DESCRIPTORS
 
 #define USE_SPI
 #define USE_SPI_DEVICE_1
@@ -44,35 +44,35 @@
 
 #define USE_IMU_MPU6000
 #define IMU_MPU6000_ALIGN CW180_DEG_FLIP
-#define MPU6000_CS_PIN PA15
-#define MPU6000_SPI_BUS BUS_SPI1
-
 #define USE_IMU_MPU6500
 #define IMU_MPU6500_ALIGN CW90_DEG
+
+// Force-override the pins that common_hardware.c reads during compilation
+#undef MPU6000_CS_PIN
+#define MPU6000_CS_PIN PA15
+
+#undef MPU6500_CS_PIN
 #define MPU6500_CS_PIN PD2
+
+#undef MPU6000_SPI_BUS
+#define MPU6000_SPI_BUS BUS_SPI1
+
+#undef MPU6500_SPI_BUS
 #define MPU6500_SPI_BUS BUS_SPI1
 
-// *************** HARDWARE-LEVEL SOFTWARE I2C MAPPINGS *********************
+// *************** SOFTWARE BIT-BANGED I2C SYSTEM *********************
 #undef USE_I2C
 #define USE_I2C
 #define USE_I2C_SOFT
 
-// Define the exact naming keys used by the low-level software bit-bang engine
+#define I2C_SOFT_COUNT 1 // Let's bring up Bus 1 first to test the Baro safely
+
 #define SOFT_I2C_SCL PB8
 #define SOFT_I2C_SDA PB9
 
 #define USE_BARO
 #define BARO_I2C_BUS BUS_I2C1
 #define USE_BARO_BMP280
-
-#define USE_MAG
-#define MAG_I2C_BUS BUS_I2C1  
-#define USE_MAG_ALL
-
-#define TEMPERATURE_I2C_BUS BUS_I2C1
-#define PITOT_I2C_BUS BUS_I2C1
-#define USE_RANGEFINDER
-#define RANGEFINDER_I2C_BUS BUS_I2C1
 
 // *************** SPI2 OSD ***********************
 #define USE_SPI_DEVICE_2
