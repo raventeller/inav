@@ -46,7 +46,7 @@
 #define USE_IMU_MPU6500
 #define IMU_MPU6500_ALIGN CW90_DEG
 
-// Override target pin maps at macro layer
+// Force target pin maps at macro layer
 #undef MPU6000_CS_PIN
 #define MPU6000_CS_PIN PA15
 
@@ -60,27 +60,17 @@
 #define MPU6500_SPI_BUS BUS_SPI1
 
 // *************** SOFTWARE BIT-BANGED I2C SYSTEM *********************
-// Stripping hardware I2C drivers entirely to prevent the 50 bus errors 
-// and unfreeze the SPI1 Gyro line clocks.
 #undef USE_I2C
 #define USE_I2C
 
-#undef USE_I2C_DEVICE_1
-#undef USE_I2C_DEVICE_2
-
-// Force Software Emulation Drivers
 #define USE_I2C_SOFT
-#define SOFT_I2C_PRIMARY 1
+#define I2C_SOFT_COUNT 2 // Tells INAV to build two distinct software buses
 
-#undef I2C1_SCL
-#undef I2C1_SDA
-#define I2C1_SCL PB8
-#define I2C1_SDA PB9
+#define SOFT_I2C_SCL_1 PB8
+#define SOFT_I2C_SDA_1 PB9
 
-#undef I2C2_SCL
-#undef I2C2_SDA
-#define I2C2_SCL PB10
-#define I2C2_SDA PB11
+#define SOFT_I2C_SCL_2 PB10
+#define SOFT_I2C_SDA_2 PB11
 
 #define USE_BARO
 #define BARO_I2C_BUS BUS_I2C1
@@ -190,4 +180,3 @@
 
 #define USE_DSHOT
 #define USE_ESC_SENSOR
-
