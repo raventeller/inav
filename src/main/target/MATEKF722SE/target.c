@@ -26,6 +26,10 @@
 #include "drivers/pinio.h"
 #include "drivers/sensor.h"
 
+// Hard-register the physical Gyros straight onto the SPI1 lines to bypass descriptor errors
+BUSDEV_REGISTER_SPI_TAG(busdev_mpu6000, DEVHW_MPU6000, BUS_SPI1, PA15, NONE, 0, DEVFLAGS_NONE, CW180_DEG_FLIP);
+BUSDEV_REGISTER_SPI_TAG(busdev_mpu6500, DEVHW_MPU6500, BUS_SPI1, PD2, NONE, 1, DEVFLAGS_NONE, CW90_DEG);
+
 timerHardware_t timerHardware[] = {
     DEF_TIM(TIM3, CH1, PB4, TIM_USE_OUTPUT_AUTO, 0, 0), // S1 Motor 1 OUT
     DEF_TIM(TIM3, CH2, PB5, TIM_USE_OUTPUT_AUTO, 0, 0), // S2 Motor 2 OUT
