@@ -27,10 +27,10 @@
 #include "drivers/sensor.h"
 
 // Register the primary Gyro (MPU6000) using PA15 as CS
-BUSDEV_REGISTER_SPI_TAG(busdev_mpu6000, DEVHW_MPU6000, BUS_SPI1, pinA15, NONE, 0, DEVFLAGS_NONE, CW180_DEG_FLIP);
+BUSDEV_REGISTER_SPI_TAG(busdev_mpu6000, DEVHW_MPU6000, BUS_SPI1, PA15, NONE, 0, DEVFLAGS_NONE, CW180_DEG_FLIP);
 
-// Register the secondary fallback Gyro (MPU6500) using PD02 as CS
-BUSDEV_REGISTER_SPI_TAG(busdev_mpu6500, DEVHW_MPU6500, BUS_SPI1, pinD02, NONE, 1, DEVFLAGS_NONE, CW90_DEG);
+// Register the secondary fallback Gyro (MPU6500) using PD2 as CS
+BUSDEV_REGISTER_SPI_TAG(busdev_mpu6500, DEVHW_MPU6500, BUS_SPI1, PD2, NONE, 1, DEVFLAGS_NONE, CW90_DEG);
 
 timerHardware_t timerHardware[] = {
     DEF_TIM(TIM3, CH1, PB4, TIM_USE_OUTPUT_AUTO, 0, 0), // S1 Motor 1 OUT
@@ -49,4 +49,5 @@ timerHardware_t timerHardware[] = {
 };
 
 const int timerHardwareCount = sizeof(timerHardware) / sizeof(timerHardware[0]);
+
 
