@@ -33,7 +33,6 @@
 #define BEEPER_INVERTED
 
 // *************** SPI1 Gyro & ACC *******************
-// Keep descriptors active so the parent target files link perfectly
 #define USE_TARGET_IMU_HARDWARE_DESCRIPTORS
 
 #define USE_SPI
@@ -47,7 +46,7 @@
 #define USE_IMU_MPU6500
 #define IMU_MPU6500_ALIGN CW90_DEG
 
-// Force-override the target's pin maps directly at the macro level
+// Override target pin maps at macro layer
 #undef MPU6000_CS_PIN
 #define MPU6000_CS_PIN PA15
 
@@ -60,20 +59,24 @@
 #undef MPU6500_SPI_BUS
 #define MPU6500_SPI_BUS BUS_SPI1
 
-// *************** I2C /Baro/Mag *********************
+// *************** SOFTWARE BIT-BANGED I2C SYSTEM *********************
+// Stripping hardware I2C drivers entirely to prevent the 50 bus errors 
+// and unfreeze the SPI1 Gyro line clocks.
+#undef USE_I2C
 #define USE_I2C
 
-// Force basic software I2C processing to drop the 50 hardware errors
-#define I2C1_OVERCLOCK false
-#define I2C2_OVERCLOCK false
+#undef USE_I2C_DEVICE_1
+#undef USE_I2C_DEVICE_2
 
-#define USE_I2C_DEVICE_1
+// Force Software Emulation Drivers
+#define USE_I2C_SOFT
+#define SOFT_I2C_PRIMARY 1
+
 #undef I2C1_SCL
 #undef I2C1_SDA
 #define I2C1_SCL PB8
 #define I2C1_SDA PB9
 
-#define USE_I2C_DEVICE_2
 #undef I2C2_SCL
 #undef I2C2_SDA
 #define I2C2_SCL PB10
@@ -187,3 +190,4 @@
 
 #define USE_DSHOT
 #define USE_ESC_SENSOR
+
