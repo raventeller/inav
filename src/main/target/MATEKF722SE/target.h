@@ -45,12 +45,12 @@
 
 #define USE_IMU_MPU6000
 #define IMU_MPU6000_ALIGN       CW180_DEG_FLIP
-#define MPU6000_CS_PIN          PB2
+#define MPU6000_CS_PIN          PA15
 #define MPU6000_SPI_BUS         BUS_SPI1
 
 #define USE_IMU_MPU6500
 #define IMU_MPU6500_ALIGN       CW90_DEG
-#define MPU6500_CS_PIN          PC15
+#define MPU6500_CS_PIN          PD2
 #define MPU6500_SPI_BUS         BUS_SPI1
 
 // *************** I2C /Baro/Mag *********************
@@ -83,7 +83,7 @@
 #define SPI2_MISO_PIN           PB14
 #define SPI2_MOSI_PIN           PB15
 
-#define USE_MAX7456
+//#define USE_MAX7456
 #define MAX7456_SPI_BUS         BUS_SPI2
 #define MAX7456_CS_PIN          PB12
 
@@ -99,12 +99,20 @@
 #   define M25P16_SPI_BUS          BUS_SPI3
 #   define M25P16_CS_PIN           PD2
 #   define ENABLE_BLACKBOX_LOGGING_ON_SPIFLASH_BY_DEFAULT
+//#else
+//#   define USE_SDCARD
+//#   define USE_SDCARD_SPI
+//#   define SDCARD_SPI_BUS          BUS_SPI3
+//#   define SDCARD_CS_PIN           PD2
+//#   define ENABLE_BLACKBOX_LOGGING_ON_SDCARD_BY_DEFAULT
+//#endif
 #else
-#   define USE_SDCARD
-#   define USE_SDCARD_SPI
-#   define SDCARD_SPI_BUS          BUS_SPI3
-#   define SDCARD_CS_PIN           PD2
-#   define ENABLE_BLACKBOX_LOGGING_ON_SDCARD_BY_DEFAULT
+// Comment out or delete the old SDCARD lines, replace with this:
+# define USE_FLASHFS
+# define USE_FLASH_M25P16
+# define M25P16_SPI_BUS          BUS_SPI3
+# define M25P16_CS_PIN           PB12  // Matches your FLASH_CS 1 B12
+# define ENABLE_BLACKBOX_LOGGING_ON_SPIFLASH_BY_DEFAULT
 #endif
 
 // *************** UART *****************************
@@ -152,9 +160,9 @@
 #define ADC_CHANNEL_3_PIN           PC0
 #define ADC_CHANNEL_4_PIN           PA4
 
-#define VBAT_ADC_CHANNEL            ADC_CHN_1
+#define VBAT_ADC_CHANNEL            ADC_CHN_3
 #define CURRENT_METER_ADC_CHANNEL   ADC_CHN_2
-#define RSSI_ADC_CHANNEL            ADC_CHN_3
+#define RSSI_ADC_CHANNEL            ADC_CHN_1
 #define AIRSPEED_ADC_CHANNEL           ADC_CHN_4
 
 // *************** PINIO ***************************
