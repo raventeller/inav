@@ -33,8 +33,8 @@
 #define BEEPER_INVERTED
 
 // *************** SPI1 Gyro & ACC *******************
-// Keep descriptors active so target.c links cleanly
-#define USE_TARGET_IMU_HARDWARE_DESCRIPTORS
+// FORCE INAV TO IGNORE THE OUTSIDE HARDWARE ARRAYS COMPLETELY:
+#undef USE_TARGET_IMU_HARDWARE_DESCRIPTORS
 
 #define USE_SPI
 #define USE_SPI_DEVICE_1
@@ -42,23 +42,19 @@
 #define SPI1_MISO_PIN PA6
 #define SPI1_MOSI_PIN PA7
 
+// Bind the gyro drivers to raw pins inside this file
 #define USE_IMU_MPU6000
 #define IMU_MPU6000_ALIGN CW180_DEG_FLIP
+#define MPU6000_CS_PIN PA15
+#define MPU6000_SPI_BUS BUS_SPI1
+
 #define USE_IMU_MPU6500
 #define IMU_MPU6500_ALIGN CW90_DEG
-
-// Clear default high-speed SPI registers to prevent line capacitance lockups
-#undef SPI1_CLOCK_STANDARD
-#undef SPI1_CLOCK_FAST
-#define SPI1_CLOCK_STANDARD   SpiClock_21MHz
-#define SPI1_CLOCK_FAST       SpiClock_21MHz
+#define MPU6500_CS_PIN PD2
+#define MPU6500_SPI_BUS BUS_SPI1
 
 // *************** I2C /Baro/Mag *********************
 #define USE_I2C
-
-// Force basic software I2C processing to drop the 50 hardware errors
-#define I2C1_OVERCLOCK false
-#define I2C2_OVERCLOCK false
 
 #define USE_I2C_DEVICE_1
 #undef I2C1_SCL
@@ -75,7 +71,6 @@
 #define USE_BARO
 #define BARO_I2C_BUS BUS_I2C1
 #define USE_BARO_BMP280
-#define USE_BARO_MS5611
 
 #define USE_MAG
 #define MAG_I2C_BUS BUS_I2C2  
@@ -181,3 +176,4 @@
 
 #define USE_DSHOT
 #define USE_ESC_SENSOR
+
