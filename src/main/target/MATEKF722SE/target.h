@@ -33,7 +33,6 @@
 #define BEEPER_INVERTED
 
 // *************** SPI1 Gyro & ACC *******************
-// Keep descriptors active so common_hardware.c links perfectly
 #define USE_TARGET_IMU_HARDWARE_DESCRIPTORS
 
 #define USE_SPI
@@ -47,7 +46,7 @@
 #define USE_IMU_MPU6500
 #define IMU_MPU6500_ALIGN CW90_DEG
 
-// Force-override the pins that common_hardware.c reads during compilation
+// Force pin mappings directly over automated defaults
 #undef MPU6000_CS_PIN
 #define MPU6000_CS_PIN PA15
 
@@ -60,12 +59,15 @@
 #undef MPU6500_SPI_BUS
 #define MPU6500_SPI_BUS BUS_SPI1
 
-// *************** SOFTWARE BIT-BANGED I2C SYSTEM *********************
-#undef USE_I2C
+// *************** I2C / Baro / Mag *********************
+// Turn on both core I2C and software I2C processing blocks
 #define USE_I2C
 #define USE_I2C_SOFT
 
-#define I2C_SOFT_COUNT 1 // Let's bring up Bus 1 first to test the Baro safely
+// Define the fallback keys to satisfy common_hardware.c dependencies
+#define DEFAULT_I2C_BUS BUS_I2C1
+
+#define I2C_SOFT_COUNT 1
 
 #define SOFT_I2C_SCL PB8
 #define SOFT_I2C_SDA PB9
@@ -169,3 +171,4 @@
 
 #define USE_DSHOT
 #define USE_ESC_SENSOR
+
