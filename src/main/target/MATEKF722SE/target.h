@@ -33,7 +33,8 @@
 #define BEEPER_INVERTED
 
 // *************** SPI1 Gyro & ACC *******************
-#define USE_TARGET_IMU_HARDWARE_DESCRIPTORS
+// Force standard hardware compilation rules
+#undef USE_TARGET_IMU_HARDWARE_DESCRIPTORS
 
 #define USE_SPI
 #define USE_SPI_DEVICE_1
@@ -43,43 +44,29 @@
 
 #define USE_IMU_MPU6000
 #define IMU_MPU6000_ALIGN CW180_DEG_FLIP
-#define USE_IMU_MPU6500
-#define IMU_MPU6500_ALIGN CW90_DEG
-
-// Set custom pin maps over master values cleanly
-#undef MPU6000_CS_PIN
 #define MPU6000_CS_PIN PA15
-
-#undef MPU6500_CS_PIN
-#define MPU6500_CS_PIN PD2
-
-#undef MPU6000_SPI_BUS
 #define MPU6000_SPI_BUS BUS_SPI1
 
-#undef MPU6500_SPI_BUS
+#define USE_IMU_MPU6500
+#define IMU_MPU6500_ALIGN CW90_DEG
+#define MPU6500_CS_PIN PD2
 #define MPU6500_SPI_BUS BUS_SPI1
 
-// *************** SOFTWARE BIT-BANGED I2C SYSTEM *********************
-// Define master parameters to trigger software driver compilation in the parent directory
+// *************** HARDWARE-LEVEL SOFTWARE I2C MAPPINGS *********************
 #undef USE_I2C
 #define USE_I2C
 #define USE_I2C_SOFT
 
-#define I2C_SOFT_COUNT 2
-
-// Explicitly bind to INAV's core software mapping keys
-#define I2C_SOFT_SCL_1 PB8
-#define I2C_SOFT_SDA_1 PB9
-
-#define I2C_SOFT_SCL_2 PB10
-#define I2C_SOFT_SDA_2 PB11
+// Define the exact naming keys used by the low-level software bit-bang engine
+#define SOFT_I2C_SCL PB8
+#define SOFT_I2C_SDA PB9
 
 #define USE_BARO
 #define BARO_I2C_BUS BUS_I2C1
 #define USE_BARO_BMP280
 
 #define USE_MAG
-#define MAG_I2C_BUS BUS_I2C2  
+#define MAG_I2C_BUS BUS_I2C1  
 #define USE_MAG_ALL
 
 #define TEMPERATURE_I2C_BUS BUS_I2C1
