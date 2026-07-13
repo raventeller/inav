@@ -44,4 +44,6 @@ timerHardware_t timerHardware[] = {
     DEF_TIM(TIM5, CH3, PA2, TIM_USE_ANY, 0, 0),         // TX2 & Softserial1
 };
 
-const int timerHardwareCount = sizeof(timerHardware) / sizeof(timerHardware);
+// FIXED: Now divides total size by the size of the first item to count elements accurately
+const int timerHardwareCount = sizeof(timerHardware) / sizeof(timerHardware[0]);
+
