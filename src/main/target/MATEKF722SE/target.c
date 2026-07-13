@@ -26,10 +26,6 @@
 #include "drivers/pinio.h"
 #include "drivers/sensor.h"
 
-// Explicitly register the physical Gyro units onto the SPI1 bus local configuration
-BUSDEV_REGISTER_SPI_TAG(busdev_mpu6000, DEVHW_MPU6000, BUS_SPI1, PA15, NONE, 0, DEVFLAGS_NONE, CW180_DEG_FLIP);
-BUSDEV_REGISTER_SPI_TAG(busdev_mpu6500, DEVHW_MPU6500, BUS_SPI1, PD2, NONE, 1, DEVFLAGS_NONE, CW90_DEG);
-
 timerHardware_t timerHardware[] = {
     DEF_TIM(TIM3, CH1, PB4, TIM_USE_OUTPUT_AUTO, 0, 0), // S1 Motor 1 OUT
     DEF_TIM(TIM3, CH2, PB5, TIM_USE_OUTPUT_AUTO, 0, 0), // S2 Motor 2 OUT
@@ -44,6 +40,6 @@ timerHardware_t timerHardware[] = {
     DEF_TIM(TIM5, CH3, PA2, TIM_USE_ANY, 0, 0),         // TX2 & Softserial1
 };
 
-// FIXED: Now divides total size by the size of the first item to count elements accurately
 const int timerHardwareCount = sizeof(timerHardware) / sizeof(timerHardware[0]);
+
 
